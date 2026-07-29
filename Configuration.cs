@@ -8,13 +8,13 @@ public class CameraConfigPreset
 {
     public enum ViewBobSetting
     {
-        Disabled,
-        [Display(Name = "First Person")] FirstPerson,
-        [Display(Name = "Out of Combat")] OutOfCombat,
-        Always
+        [Display(Name = "停用")] Disabled,
+        [Display(Name = "第一人稱")] FirstPerson,
+        [Display(Name = "非戰鬥中")] OutOfCombat,
+        [Display(Name = "永遠")] Always
     }
 
-    public string Name = "New Preset";
+    public string Name = "新增預設";
 
     public bool UseStartOnLogin = false;
 
@@ -51,9 +51,9 @@ public class Configuration : PluginConfiguration, IPluginConfiguration
 {
     public enum DeathCamSetting
     {
-        Disabled,
-        Spectate,
-        [Display(Name = "Free Cam")] FreeCam
+        [Display(Name = "停用")] Disabled,
+        [Display(Name = "觀戰")] Spectate,
+        [Display(Name = "自由鏡頭")] FreeCam
     }
 
     public int Version { get; set; }

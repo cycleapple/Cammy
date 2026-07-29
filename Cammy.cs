@@ -19,7 +19,7 @@ public class Cammy(IDalamudPluginInterface pluginInterface) : DalamudPlugin<Conf
 
     private const string cammySubcommands = "/cammy [ help | preset | zoom | fov | spectate | nocollide | freecam ]";
 
-    [PluginCommand("/cammy", HelpMessage = "Opens / closes the config. Additional usage: " + cammySubcommands)]
+    [PluginCommand("/cammy", HelpMessage = "開啟／關閉設定視窗。其他用法：" + cammySubcommands)]
     private unsafe void ToggleConfig(string command, string argument)
     {
         if (string.IsNullOrEmpty(argument))
@@ -38,7 +38,7 @@ public class Cammy(IDalamudPluginInterface pluginInterface) : DalamudPlugin<Conf
                     if (regex.Groups.Count < 2 || string.IsNullOrEmpty(regex.Groups[2].Value))
                     {
                         PresetManager.CurrentPreset = null;
-                        DalamudApi.PrintEcho("Removed preset override.");
+                        DalamudApi.PrintEcho("已取消預設覆寫。");
                         return;
                     }
 
@@ -47,19 +47,19 @@ public class Cammy(IDalamudPluginInterface pluginInterface) : DalamudPlugin<Conf
 
                     if (preset == null)
                     {
-                        DalamudApi.PrintError($"Failed to find preset \"{arg}\"");
+                        DalamudApi.PrintError($"找不到預設「{arg}」。");
                         return;
                     }
 
                     PresetManager.CurrentPreset = preset;
-                    DalamudApi.PrintEcho($"Preset set to \"{arg}\"");
+                    DalamudApi.PrintEcho($"已套用預設「{arg}」。");
                     break;
                 }
             case "zoom":
                 {
                     if (regex.Groups.Count < 2 || !float.TryParse(regex.Groups[2].Value, out var amount))
                     {
-                        DalamudApi.PrintError("Invalid amount.");
+                        DalamudApi.PrintError("數值無效。");
                         return;
                     }
 
@@ -70,7 +70,7 @@ public class Cammy(IDalamudPluginInterface pluginInterface) : DalamudPlugin<Conf
                 {
                     if (regex.Groups.Count < 2 || !float.TryParse(regex.Groups[2].Value, out var amount))
                     {
-                        DalamudApi.PrintError("Invalid amount.");
+                        DalamudApi.PrintError("數值無效。");
                         return;
                     }
 
@@ -80,7 +80,7 @@ public class Cammy(IDalamudPluginInterface pluginInterface) : DalamudPlugin<Conf
             case "spectate":
                 {
                     Game.EnableSpectating ^= true;
-                    DalamudApi.PrintEcho($"Spectating is now {(Game.EnableSpectating ? "enabled" : "disabled")}!");
+                    DalamudApi.PrintEcho($"觀戰功能已{(Game.EnableSpectating ? "啟用" : "停用")}！");
                     break;
                 }
             case "nocollide":
@@ -89,7 +89,7 @@ public class Cammy(IDalamudPluginInterface pluginInterface) : DalamudPlugin<Conf
                     if (!FreeCam.Enabled)
                         Game.cameraNoClippyReplacer.Toggle();
                     Config.Save();
-                    DalamudApi.PrintEcho($"Camera collision is now {(Config.EnableCameraNoClippy ? "disabled" : "enabled")}!");
+                    DalamudApi.PrintEcho($"鏡頭碰撞已{(Config.EnableCameraNoClippy ? "停用" : "啟用")}！");
                     break;
                 }
             case "freecam":
@@ -99,18 +99,18 @@ public class Cammy(IDalamudPluginInterface pluginInterface) : DalamudPlugin<Conf
                 }
             case "help":
                 {
-                    DalamudApi.PrintEcho("Subcommands:" +
-                        "\npreset <name> - Applies a preset to override automatic presets, specified by name. Use without a name to disable." +
-                        "\nzoom <amount> - Sets the current zoom level." +
-                        "\nfov <amount> - Sets the current FoV level." +
-                        "\nspectate - Toggles the \"Spectate Focus / Soft Target\" option." +
-                        "\nnocollide - Toggles the \"Disable Camera Collision\" option." +
-                        "\nfreecam - Toggles the \"Free Cam\" option.");
+                    DalamudApi.PrintEcho("子命令：" +
+                        "\npreset <name>－依名稱套用預設並覆寫自動預設；不指定名稱可停用覆寫。" +
+                        "\nzoom <amount>－設定目前鏡頭距離。" +
+                        "\nfov <amount>－設定目前視野。" +
+                        "\nspectate－切換「觀察焦點目標／軟目標」選項。" +
+                        "\nnocollide－切換「停用鏡頭碰撞」選項。" +
+                        "\nfreecam－切換「自由鏡頭」選項。");
                     break;
                 }
             default:
                 {
-                    DalamudApi.PrintError("Invalid usage: " + cammySubcommands);
+                    DalamudApi.PrintError("用法錯誤：" + cammySubcommands);
                     break;
                 }
         }

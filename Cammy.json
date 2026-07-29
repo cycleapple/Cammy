@@ -1,8 +1,8 @@
 ﻿{
   "Author": "UnknownX",
   "Name": "Cammy",
-  "Punchline": "A simple editor for the game's camera settings",
-  "Description": "A simple camera editor to change various game defaults such as zoom and fov.\nThis is a zoom hack, if you aren't comfortable with that fact, don't install it.",
+  "Punchline": "調整遊戲鏡頭的各項設定。",
+  "Description": "可調整鏡頭縮放、視野等遊戲預設值的鏡頭編輯器。\n本插件會修改鏡頭縮放限制；若無法接受此類功能，請勿安裝。",
   "IconUrl": "https://raw.githubusercontent.com/UnknownX7/DalamudPluginRepo/master/plugins/Cammy/images/icon.png",
   "ImageUrls": [
     "https://raw.githubusercontent.com/UnknownX7/DalamudPluginRepo/master/plugins/Cammy/images/image1.png"
